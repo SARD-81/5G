@@ -9112,7 +9112,7 @@ for (let i = 0; i < 3; i++) {
 
   // Convert decimal to hex when decimal input changes
   cellDecInput.addEventListener("input", function () {
-    const decValue = parseInt(this.value) || 0;
+    let decValue = parseInt(this.value) || 0;
     if (decValue < 0) {
       this.value = 0;
       decValue = 0;
@@ -9135,7 +9135,7 @@ for (let i = 0; i < 3; i++) {
 
   // Convert decimal to hex when decimal input changes
   tacDecInput.addEventListener("input", function () {
-    const decValue = parseInt(this.value) || 0;
+    let decValue = parseInt(this.value) || 0;
     if (decValue < 0) {
       this.value = 0;
       decValue = 0;
@@ -9165,7 +9165,7 @@ for (let cellNum = 0; cellNum < 3; cellNum++) {
 
     // Convert decimal to hex when decimal input changes
     decInput.addEventListener("input", function () {
-      const decValue = parseInt(this.value) || 0;
+      let decValue = parseInt(this.value) || 0;
       if (decValue < 0) {
         this.value = 0;
         decValue = 0;
@@ -9335,7 +9335,7 @@ for (let i = 0; i < 3; i++) {
 
   // Convert decimal to hex when decimal input changes
   decInput.addEventListener("input", function () {
-    const decValue = parseInt(this.value) || 0;
+    let decValue = parseInt(this.value) || 0;
     if (decValue < 0) {
       this.value = 0;
       decValue = 0;

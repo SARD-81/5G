@@ -49,7 +49,10 @@ export const removeCookie = (cname) => {
   document.cookie = `${cname}=;expires=1970;path=/`;
 };
 
-axios.defaults.baseURL = "/back-end/api/";
+// axios.defaults.baseURL = "/back-end/api/";
+axios.defaults.baseURL = "/api/";
+axios.defaults.headers.common["Accept"] = "application/json";
+axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // axios.defaults.baseURL = "/back-end/public/api/";
 // axios.defaults.baseURL = "http://192.168.0.69/back-end/api/";
 // axios.defaults.baseURL = "http://5g.anatoa.ir/api/";

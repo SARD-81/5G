@@ -8814,21 +8814,24 @@ async function showRouteServer(serverId) {
 
       // تقسیم هر خط
       let rows = cleanedOutput.split("\n");
+      const serverName =
+        serverCard?.find((server) => server.id == server_id)?.name || "";
+      const testRoute = serverName ? `root@${serverName}` : "";
 
       // ساخت ردیف‌ها
-      rows.forEach((rowText, x) => {
+      rows
+        .filter((rowText) => rowText.trim() && rowText.trim() !== testRoute)
+        .forEach((rowText, x) => {
         const cleanRow = rowText.trim();
 
-        if (cleanRow) {
-          const tr = document.createElement("tr");
-          tr.setAttribute("id", `trRoute${x}`);
+        const tr = document.createElement("tr");
+        tr.setAttribute("id", `trRoute${x}`);
 
-          const tdText = document.createElement("td");
-          tdText.textContent = cleanRow;
+        const tdText = document.createElement("td");
+        tdText.textContent = cleanRow;
 
-          tr.appendChild(tdText);
-          tableBody.appendChild(tr);
-        }
+        tr.appendChild(tdText);
+        tableBody.appendChild(tr);
       });
 
       // فرم‌ها رو پنهان/نمایش بده

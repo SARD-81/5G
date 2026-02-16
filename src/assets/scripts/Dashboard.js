@@ -1,7 +1,7 @@
 import { auth_name, setAuthName } from "./auth.js";
 import useApi from "./useApi.js";
 import Toastify from "toastify-js";
-import IconBBDH from "../img/logo white with logo type.png";
+import IconBBDH from "../img/bbdh-rightel.png";
 import favIconBBDH from "../img/logo white.png";
 import IconMCI from "../img/logo-mci-02 (1).svg";
 import IconBBU from "../img/image.png";
@@ -112,15 +112,12 @@ if (window.innerWidth > 768 || window.innerWidth == 768) {
 }
 
 if (window.innerWidth > 470 && window.innerWidth < 576) {
-  document.getElementById("tableResponsive").style.width = `${
-    window.innerWidth - 30
-  }px`;
-  document.getElementById("tableResponsiveUser").style.width = `${
-    window.innerWidth - 30
-  }px`;
-  document.getElementById("tableResponsiveLog").style.width = `${
-    window.innerWidth - 30
-  }px`;
+  document.getElementById("tableResponsive").style.width = `${window.innerWidth - 30
+    }px`;
+  document.getElementById("tableResponsiveUser").style.width = `${window.innerWidth - 30
+    }px`;
+  document.getElementById("tableResponsiveLog").style.width = `${window.innerWidth - 30
+    }px`;
 }
 
 if (window.innerWidth <= 470) {
@@ -158,7 +155,7 @@ if (project == "BBDH") {
   document.getElementById("logo").style.margin = "0";
 }
 
-let arrForActiveSubMenu = [1, 2];
+let arrForActiveSubMenu = [1];
 
 function forSubMneu() {
   for (let i = 1; i <= arrForActiveSubMenu.length; i++) {
@@ -371,16 +368,16 @@ if (project == "BBDH") {
       });
     });
 
-  document
-    .querySelector("#v-access-levels-tab")
-    .addEventListener("shown.bs.tab", function () {
-      if (document.getElementById("closeOffcanvas")) {
-        document.getElementById("closeOffcanvas").click();
-      }
-      whichTab = "accessLevel";
-      const id = this.dataset.id; // گرفتن id از data-id
-      subMenu(id); // فراخوانی تابع با id مربوطه
-    });
+  // document
+  //   .querySelector("#v-access-levels-tab")
+  //   .addEventListener("shown.bs.tab", function () {
+  //     if (document.getElementById("closeOffcanvas")) {
+  //       document.getElementById("closeOffcanvas").click();
+  //     }
+  //     whichTab = "accessLevel";
+  //     const id = this.dataset.id; // گرفتن id از data-id
+  //     subMenu(id); // فراخوانی تابع با id مربوطه
+  //   });    --------------------------------------------------deleting accessUser submenu Part----------------------
 }
 
 document.getElementById("buttonLogout").addEventListener("click", function () {
@@ -696,7 +693,7 @@ function ActiveMenu(x) {
 }
 
 function iconDisplay() {
-  for (let i = 1; i <= 2; i++) {
+  for (let i = 1; i <= arrForActiveSubMenu.length; i++) {
     document.querySelector(".iconSubMenu" + i).style.display = "none";
   }
 }
@@ -712,8 +709,8 @@ function subMenu(x) {
   } else {
     document.querySelector(".menus6")?.classList.add("activeMenu");
   }
-  document.querySelector(".subMenu" + x)?.classList.add("clickSubMenu");
-  document.querySelector(".iconSubMenu" + x).style.display = "flex";
+  document.querySelector(".subMenu1")?.classList.add("clickSubMenu");
+  document.querySelector(".iconSubMenu1").style.display = "flex";
   return;
 }
 /// users ///
@@ -2012,20 +2009,17 @@ async function showUsers(page = 1) {
         if (totalPages != 1) {
           // First button
           const firstItem = document.createElement("li");
-          firstItem.className = `page-item ${
-            currentPage === 1 ? "disabled" : ""
-          }`;
+          firstItem.className = `page-item ${currentPage === 1 ? "disabled" : ""
+            }`;
           firstItem.innerHTML = `<a class="page-link" href="#" data-page="1">First Page</a>`;
           paginationUser.appendChild(firstItem);
 
           // Previous button
           const prevItem = document.createElement("li");
-          prevItem.className = `page-item ${
-            currentPage === 1 ? "disabled" : ""
-          }`;
-          prevItem.innerHTML = `<a class="page-link" href="#" data-page="${
-            currentPage - 1
-          }">Previous Page</a>`;
+          prevItem.className = `page-item ${currentPage === 1 ? "disabled" : ""
+            }`;
+          prevItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1
+            }">Previous Page</a>`;
           paginationUser.appendChild(prevItem);
 
           // Page numbers logic
@@ -2041,30 +2035,25 @@ async function showUsers(page = 1) {
             i++
           ) {
             const pageItem = document.createElement("li");
-            pageItem.className = `page-item ${
-              i === currentPage ? "active" : ""
-            }`;
-            pageItem.innerHTML = `<a class="page-link ${
-              i === currentPage ? "active-page" : ""
-            }" href="#" data-page="${i}">${i}</a>`;
+            pageItem.className = `page-item ${i === currentPage ? "active" : ""
+              }`;
+            pageItem.innerHTML = `<a class="page-link ${i === currentPage ? "active-page" : ""
+              }" href="#" data-page="${i}">${i}</a>`;
             paginationUser.appendChild(pageItem);
           }
 
           // Next button
           const nextItem = document.createElement("li");
-          nextItem.className = `page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`;
-          nextItem.innerHTML = `<a class="page-link" href="#" data-page="${
-            currentPage + 1
-          }">Next Page</a>`;
+          nextItem.className = `page-item ${currentPage === totalPages ? "disabled" : ""
+            }`;
+          nextItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1
+            }">Next Page</a>`;
           paginationUser.appendChild(nextItem);
 
           // Last button
           const lastItem = document.createElement("li");
-          lastItem.className = `page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`;
+          lastItem.className = `page-item ${currentPage === totalPages ? "disabled" : ""
+            }`;
           lastItem.innerHTML = `<a class="page-link" href="#" data-page="${totalPages}">Last Page</a>`;
           paginationUser.appendChild(lastItem);
 
@@ -3296,7 +3285,7 @@ async function server(x) {
     if (server.id == x) {
       username = server.username;
       password = server.password;
-      port = server.port;
+      Number(port = server.port);
     }
   });
 
@@ -3743,6 +3732,7 @@ function iconPlay() {
 let dataServer = [];
 if (JSON.parse(localStorage.getItem("dataServer", dataServer))) {
   dataServer = JSON.parse(localStorage.getItem("dataServer", dataServer));
+
 }
 let dataIdPassword;
 
@@ -3786,7 +3776,7 @@ document.getElementById("savePasswordServer").addEventListener("click", () => {
 async function savePasswordServer(id) {
   // let username, password;
 
-  const port = document.getElementById("portServer").value.trim();
+  const port = Number(document.getElementById("portServer").value.trim());
   const username = document.getElementById("usernameServer").value.trim();
   const password = document.getElementById("inputPasswordServer").value.trim();
 
@@ -3814,15 +3804,18 @@ async function savePasswordServer(id) {
 
       dataServer.forEach((server) => {
         if (server.id == dataIdPassword) {
+          debugger
           server.username = document
             .getElementById("usernameServer")
             .value.trim();
           server.password = document
             .getElementById("inputPasswordServer")
             .value.trim();
-          server.port = document.getElementById("portServer").value.trim();
+          server.port = Number(document.getElementById("portServer").value.trim());
+
           found = true; // یعنی این آیتم وجود داشت
         }
+        else (console.log("salam"))
       });
 
       if (!found) {
@@ -4476,20 +4469,17 @@ async function pageLog(page = 1) {
         if (totalPages != 1) {
           // First button
           const firstItem = document.createElement("li");
-          firstItem.className = `page-item ${
-            currentPage === 1 ? "disabled" : ""
-          }`;
+          firstItem.className = `page-item ${currentPage === 1 ? "disabled" : ""
+            }`;
           firstItem.innerHTML = `<a class="page-link" href="#" data-page="1">First Page</a>`;
           pagination.appendChild(firstItem);
 
           // Previous button
           const prevItem = document.createElement("li");
-          prevItem.className = `page-item ${
-            currentPage === 1 ? "disabled" : ""
-          }`;
-          prevItem.innerHTML = `<a class="page-link" href="#" data-page="${
-            currentPage - 1
-          }">Previous Page</a>`;
+          prevItem.className = `page-item ${currentPage === 1 ? "disabled" : ""
+            }`;
+          prevItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1
+            }">Previous Page</a>`;
           pagination.appendChild(prevItem);
 
           // Page numbers logic
@@ -4505,30 +4495,25 @@ async function pageLog(page = 1) {
             i++
           ) {
             const pageItem = document.createElement("li");
-            pageItem.className = `page-item ${
-              i === currentPage ? "active" : ""
-            }`;
-            pageItem.innerHTML = `<a class="page-link ${
-              i === currentPage ? "active-page" : ""
-            }" href="#" data-page="${i}">${i}</a>`;
+            pageItem.className = `page-item ${i === currentPage ? "active" : ""
+              }`;
+            pageItem.innerHTML = `<a class="page-link ${i === currentPage ? "active-page" : ""
+              }" href="#" data-page="${i}">${i}</a>`;
             pagination.appendChild(pageItem);
           }
 
           // Next button
           const nextItem = document.createElement("li");
-          nextItem.className = `page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`;
-          nextItem.innerHTML = `<a class="page-link" href="#" data-page="${
-            currentPage + 1
-          }">Next Page</a>`;
+          nextItem.className = `page-item ${currentPage === totalPages ? "disabled" : ""
+            }`;
+          nextItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1
+            }">Next Page</a>`;
           pagination.appendChild(nextItem);
 
           // Last button
           const lastItem = document.createElement("li");
-          lastItem.className = `page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`;
+          lastItem.className = `page-item ${currentPage === totalPages ? "disabled" : ""
+            }`;
           lastItem.innerHTML = `<a class="page-link" href="#" data-page="${totalPages}">Last Page</a>`;
           pagination.appendChild(lastItem);
 
@@ -4873,20 +4858,17 @@ async function showModuls(page = 1) {
         if (totalPages != 1) {
           // First button
           const firstItem = document.createElement("li");
-          firstItem.className = `page-item ${
-            currentPage === 1 ? "disabled" : ""
-          }`;
+          firstItem.className = `page-item ${currentPage === 1 ? "disabled" : ""
+            }`;
           firstItem.innerHTML = `<a class="page-link" href="#" data-page="1">First Page</a>`;
           paginationModule.appendChild(firstItem);
 
           // Previous button
           const prevItem = document.createElement("li");
-          prevItem.className = `page-item ${
-            currentPage === 1 ? "disabled" : ""
-          }`;
-          prevItem.innerHTML = `<a class="page-link" href="#" data-page="${
-            currentPage - 1
-          }">Previous Page</a>`;
+          prevItem.className = `page-item ${currentPage === 1 ? "disabled" : ""
+            }`;
+          prevItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage - 1
+            }">Previous Page</a>`;
           paginationModule.appendChild(prevItem);
 
           // Page numbers logic
@@ -4902,30 +4884,25 @@ async function showModuls(page = 1) {
             i++
           ) {
             const pageItem = document.createElement("li");
-            pageItem.className = `page-item ${
-              i === currentPage ? "active" : ""
-            }`;
-            pageItem.innerHTML = `<a class="page-link ${
-              i === currentPage ? "active-page" : ""
-            }" href="#" data-page="${i}">${i}</a>`;
+            pageItem.className = `page-item ${i === currentPage ? "active" : ""
+              }`;
+            pageItem.innerHTML = `<a class="page-link ${i === currentPage ? "active-page" : ""
+              }" href="#" data-page="${i}">${i}</a>`;
             paginationModule.appendChild(pageItem);
           }
 
           // Next button
           const nextItem = document.createElement("li");
-          nextItem.className = `page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`;
-          nextItem.innerHTML = `<a class="page-link" href="#" data-page="${
-            currentPage + 1
-          }">Next Page</a>`;
+          nextItem.className = `page-item ${currentPage === totalPages ? "disabled" : ""
+            }`;
+          nextItem.innerHTML = `<a class="page-link" href="#" data-page="${currentPage + 1
+            }">Next Page</a>`;
           paginationModule.appendChild(nextItem);
 
           // Last button
           const lastItem = document.createElement("li");
-          lastItem.className = `page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`;
+          lastItem.className = `page-item ${currentPage === totalPages ? "disabled" : ""
+            }`;
           lastItem.innerHTML = `<a class="page-link" href="#" data-page="${totalPages}">Last Page</a>`;
           paginationModule.appendChild(lastItem);
 
@@ -6142,9 +6119,12 @@ document
       //   localStorage.setItem("userNameServer", userName);
       //   localStorage.setItem("passwordServer", password);
       // }
+      let moduleFile;
+
+      moduleFile = document.getElementById("moduleAddFile").value;
+      console.log(moduleFile)
 
       let moduleName = document.getElementById("moduleAddName").value;
-      let moduleFile = document.getElementById("moduleAddFile").value;
       let radioButtons = document.querySelectorAll(
         'input[name="flexRadioDefault"]'
       );
@@ -6154,7 +6134,6 @@ document
 
       const isChecked = [...radioButtons].some((radio) => radio.checked);
       const isCheckedBox = [...checkBox].some((checkBox) => checkBox.checked);
-
       if (moduleName.length < 3) {
         Toastify({
           text: "The module name is less than 3 characters.",
@@ -6205,10 +6184,8 @@ async function addModules() {
   let nameModul = document.querySelector(
     'input[name="name_nameInputAddModule"]'
   ).value;
-
   let fileInput = document.getElementById("moduleAddFile");
   let fileModule = fileInput.files[0];
-
   let typeModule;
 
   let fivegcType = document.getElementById("moduleAddType5GC");
@@ -6269,7 +6246,7 @@ async function addModules() {
   });
 
   // اضافه کردن مقادیر به FormData
-  formData.append("name", nameModul);
+  formData.append("name", nameModul + "_" + fileModule.name.replace(/\.\w*/gm, ""))
   if (fileModule) {
     formData.append("config_file", fileModule); // فایل را اضافه می‌کنیم
   }
@@ -6295,6 +6272,7 @@ async function addModules() {
 
   // formData.append("username", userName);
   // formData.append("password", password);
+
   await useApi({
     url: `create-module`,
     method: "post",
@@ -6336,7 +6314,7 @@ async function addModules() {
         if (x == 1) {
           td.innerHTML = endPageShowUser;
         } else if (x == 2) {
-          td.innerHTML = document.getElementById("moduleAddName").value;
+          td.innerHTML = nameModul + " _ " + fileModule.name.replace(/\.\w*/gm, "")
         } else if (x == 3) {
           let arrServers = [];
           let span = document.createElement("span");
@@ -6483,7 +6461,58 @@ async function sendAddress() {
   });
   document.getElementById("idLoading").style.display = "none";
 }
+//mahdi's js..............................................................
 
+let questionMark = document.querySelector(".userQuestionInit");
+let InnerModal =
+  questionMark.addEventListener("mouseover", () => {
+    document.querySelector(".userQuestionModal").style.display = "flex"
+  })
+document.querySelector(".userQuestionModal").addEventListener("mouseleave", () => {
+  document.querySelector(".userQuestionModal").style.display = "none"
+})
+document.querySelector(".userQuestionModal").addEventListener("mouseover", () => {
+  document.querySelectorAll(".UsersLevels").forEach(item => {
+    item.addEventListener("mouseover", () => {
+
+      switch (item.innerText) {
+        case "admin":
+          document.querySelector(".userQuestionModal_innerModal").style.display = "block"
+          document.querySelector(".adminPermissions").style.display = "block"
+          break;
+        case "expert":
+          document.querySelector(".userQuestionModal_innerModal").style.display = "block"
+          document.querySelector(".expertpermissions").style.display = "block"
+          break;
+        case "user":
+          document.querySelector(".userQuestionModal_innerModal").style.display = "block"
+          document.querySelector(".userPermissions").style.display = "block"
+          break;
+        default:
+          break;
+      }
+      item.addEventListener("mouseleave", () => {
+        switch (item.innerText) {
+          case "admin":
+            document.querySelector(".userQuestionModal_innerModal").style.display = "none"
+            document.querySelector(".adminPermissions").style.display = "none"
+            break;
+          case "expert":
+            document.querySelector(".userQuestionModal_innerModal").style.display = "none"
+            document.querySelector(".expertpermissions").style.display = "none"
+            break;
+          case "user":
+            document.querySelector(".userQuestionModal_innerModal").style.display = "none"
+            document.querySelector(".userPermissions").style.display = "none"
+            break;
+          default:
+            break;
+        }
+      })
+    })
+  })
+})
+//........................................................................
 function removeUrlLogParams() {
   // Get the current URL
   const url = new URL(window.location.href);
@@ -7222,6 +7251,7 @@ if (document.getElementById("v-ping")) {
     if (ping) {
       pingServer();
     } else {
+      debugger
       interfacePing();
     }
   });
@@ -7243,7 +7273,7 @@ async function pingServer() {
     if (server.id == server_id) {
       (username = server.username),
         (password = server.password),
-        (port = server.port);
+        (port = Number(server.port));
     }
   });
 
@@ -7256,7 +7286,7 @@ async function pingServer() {
       Interface,
       username,
       password,
-      ...(!!port ? { port } : {}),
+      ...(port ? { port } : {}),
     },
     callback: function (data) {
       document.getElementById("resultPing").style.display = "block";
@@ -7293,8 +7323,9 @@ async function interfacePing() {
         id: idServer,
         username: server.username,
         password: server.password,
-        port: server.port,
+        port: Number(server.port),
       };
+
       servers.push(serverSpecifications);
     }
   });
@@ -7914,7 +7945,7 @@ async function fetchInterfaces(serverData, serverName, container) {
       id: serverData.id,
       username: serverData.username,
       password: serverData.password,
-      port: serverData.port || 22,
+      port: serverData.port ? Number(serverData.port) : 22,
     },
   ];
   await useApi({
@@ -8779,7 +8810,7 @@ async function showRouteServer(serverId) {
     if (server.id == server_id) {
       (username = server.username),
         (password = server.password),
-        (port = server.port);
+        (port = Number(server.port));
     }
   });
 
@@ -8822,17 +8853,17 @@ async function showRouteServer(serverId) {
       rows
         .filter((rowText) => rowText.trim() && rowText.trim() !== testRoute)
         .forEach((rowText, x) => {
-        const cleanRow = rowText.trim();
+          const cleanRow = rowText.trim();
 
-        const tr = document.createElement("tr");
-        tr.setAttribute("id", `trRoute${x}`);
+          const tr = document.createElement("tr");
+          tr.setAttribute("id", `trRoute${x}`);
 
-        const tdText = document.createElement("td");
-        tdText.textContent = cleanRow;
+          const tdText = document.createElement("td");
+          tdText.textContent = cleanRow;
 
-        tr.appendChild(tdText);
-        tableBody.appendChild(tr);
-      });
+          tr.appendChild(tdText);
+          tableBody.appendChild(tr);
+        });
 
       // فرم‌ها رو پنهان/نمایش بده
       document.getElementById("idFormGetRoute")?.classList.remove("d-flex");

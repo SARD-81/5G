@@ -154,14 +154,17 @@ export default async function (props) {
       url,
       data,
       signal: controller.signal,
-
       ...(responseType ? { responseType } : {}),
       headers: mergedHeaders,
+      
       onDownloadProgress: (progressEvent) => {
         if (responseType) startProgress(progressEvent);
+
+
       },
       onUploadProgress: (progressEvent) => {
         if (upload) startProgress(progressEvent);
+
       },
     });
 
@@ -175,16 +178,20 @@ export default async function (props) {
     }
 
     return response.data;
-  } catch (error) {
-    console.error("ERROR: ", error);
+  }
+catch (error) {
+  console.error("AXIOS FULL ERROR:", error);
+  console.log("STATUS:", error.response?.status);
+  console.log("DATA:", error.response?.data);
+  console.log("HEADERS:", error.response?.headers);
 
-    // alert(error.response);
-    if (errorCallback && typeof errorCallback === "function")
-      errorCallback(error.response);
-    handleError(error);
+  if (errorCallback && typeof errorCallback === "function")
+    errorCallback(error.response);
 
-    // Handle request errors
-  } finally {
+  handleError(error);
+}
+
+  finally {
     if (responseType || upload) resetProgressVars();
 
     if (finallyCallback && typeof finallyCallback === "function")

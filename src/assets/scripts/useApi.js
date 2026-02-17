@@ -156,7 +156,7 @@ export default async function (props) {
       signal: controller.signal,
       ...(responseType ? { responseType } : {}),
       headers: mergedHeaders,
-      
+
       onDownloadProgress: (progressEvent) => {
         if (responseType) startProgress(progressEvent);
 
@@ -179,17 +179,17 @@ export default async function (props) {
 
     return response.data;
   }
-catch (error) {
-  console.error("AXIOS FULL ERROR:", error);
-  console.log("STATUS:", error.response?.status);
-  console.log("DATA:", error.response?.data);
-  console.log("HEADERS:", error.response?.headers);
+  catch (error) {
+    console.error("AXIOS FULL ERROR:", error);
+    console.log("STATUS:", error.response?.status);
+    console.log("DATA:", error.response?.data);
+    console.log("HEADERS:", error.response?.headers);
 
-  if (errorCallback && typeof errorCallback === "function")
-    errorCallback(error.response);
+    if (errorCallback && typeof errorCallback === "function")
+      errorCallback(error.response);
 
-  handleError(error);
-}
+    handleError(error);
+  }
 
   finally {
     if (responseType || upload) resetProgressVars();
@@ -245,18 +245,18 @@ const handleError = (error) => {
           background: "linear-gradient(to right,rgb(255, 0, 0),rgb(231, 0, 0))",
         },
       }).showToast();
-    } else if (MSG) {
-      // Case 3: Single error message
-      if (error.status == 401) {
-        // if (router.currentRoute.meta.needAuth) {
-        Toastify({
-          text: "Token expired. Need to log in again.",
+  } else if (MSG) {
+    // Case 3: Single error message
+    if (error.status == 401) {
+      // if (router.currentRoute.meta.needAuth) {
+      Toastify({
+        text: "Token expired. Need to log in again.",
         style: {
           background: "linear-gradient(to right,rgb(255, 0, 0),rgb(231, 0, 0))",
         },
       }).showToast();
       // setTimeout(() => {
-        window.location.href = "../views/login.html";
+      window.location.href = "../views/login.html";
       // }, 2000);
       // return router.replace({ name: "Login" });
       // }

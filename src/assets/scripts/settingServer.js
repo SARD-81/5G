@@ -37,12 +37,10 @@ if (window.innerWidth < 650) {
 }
 
 if (window.innerWidth < 768) {
-  document.getElementById("EditorContainer").style.width = `${
-    window.innerWidth - 27
-  }px`;
-  document.getElementById("TabEditorContainer").style.width = `${
-    window.innerWidth - 27
-  }px`;
+  document.getElementById("EditorContainer").style.width = `${window.innerWidth - 27
+    }px`;
+  document.getElementById("TabEditorContainer").style.width = `${window.innerWidth - 27
+    }px`;
 }
 
 // import * as jsondiffpatch from "jsondiffpatch";
@@ -123,11 +121,9 @@ function generateFormFromJson(data) {
         const tabButton = document.createElement("li");
         tabButton.classList.add("nav-item");
         tabButton.innerHTML = `
-          <button class="nav-link ${
-            index === 0 ? "active" : ""
-          }" id="${tabId}-tab" data-bs-toggle="tab" data-bs-target="#${tabId}" type="button" role="tab" aria-controls="${tabId}" aria-selected="${
-          index === 0
-        }">
+          <button class="nav-link ${index === 0 ? "active" : ""
+          }" id="${tabId}-tab" data-bs-toggle="tab" data-bs-target="#${tabId}" type="button" role="tab" aria-controls="${tabId}" aria-selected="${index === 0
+          }">
           ${key}
         </button>
         `;
@@ -962,6 +958,8 @@ async function ExportModules(id) {
       ...(!!port ? { port } : {}),
     },
     callback: async function (data) {
+      const text = await data.text(); // blob → text
+      console.log("YAML received from server:\n", text);
       downloadFileProcess(data);
     },
   });

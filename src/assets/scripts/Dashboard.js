@@ -1,7 +1,7 @@
 import { auth_name, setAuthName } from "./auth.js";
 import useApi from "./useApi.js";
 import Toastify from "toastify-js";
-import IconBBDH from "../img/bbdh-rightel.png";
+import IconBBDH from "../img/logo white with logo type.png";
 import favIconBBDH from "../img/logo white.png";
 import IconMCI from "../img/logo-mci-02 (1).svg";
 import IconBBU from "../img/image.png";
@@ -2790,6 +2790,7 @@ async function editUsers(id) {
         data.data.user.auth_name;
       document.querySelector(`#tr${id} .td5 span`).innerHTML =
         data.data.user.roles;
+
 
       let spanTd = document.querySelector(`#tr${data.data.user.id} .td5 span`);
 
@@ -5923,6 +5924,7 @@ async function editModules(idModule) {
         //   localStorage.setItem("userNameServer", userName);
         //   localStorage.setItem("passwordServer", password);
         // }
+
         document.querySelector(`#tr${idTrModule} .td2`).innerHTML =
           data.module.module_name;
 
@@ -6246,11 +6248,14 @@ async function addModules() {
   });
 
   // اضافه کردن مقادیر به FormData
-  formData.append("name", nameModul + "_" + fileModule.name.replace(/\.\w*/gm, ""))
+  //  fileModule.name.replace(/\.\w*/gm, "")
+  formData.append("name", nameModul)
   if (fileModule) {
     formData.append("config_file", fileModule); // فایل را اضافه می‌کنیم
+    formData.append("configType", fileModule.name.replace(/\.\w*/gm, ""))
   }
   formData.append("type", typeModule);
+  console.log(formData.get("configType"))
   // serverIds.forEach((serverId) => {
   //   formData.append("servers[]", serverId);
   // });
@@ -6281,6 +6286,7 @@ async function addModules() {
       "Content-Type": "multipart/form-data", // این هدر مهم است
     },
     callback: function (data) {
+      console.log(data)
       // localStorage.setItem("port", port);
       let serverId = [];
       let endPageShowUser =
@@ -6306,25 +6312,41 @@ async function addModules() {
         moduleID: data.data.created_modules[0].module.module_id,
         moduleName: data.data.created_modules[0].module.module_name,
         moduleType: [data.data.created_modules[0].module.module_type],
+        configType: data.data.created_modules[0].module.config_type,
       });
 
-      for (let x = 1; x <= 7; x++) {
+      for (let x = 1; x <= 8; x++) {
         let td = document.createElement("td");
         td.setAttribute("class", `td${x}`);
+
         if (x == 1) {
+          // Row
           td.innerHTML = endPageShowUser;
+
         } else if (x == 2) {
-          td.innerHTML = nameModul + " _ " + fileModule.name.replace(/\.\w*/gm, "")
+          // nameModule
+          td.innerHTML =
+            data.data.created_modules[0].module.module_name;
+
         } else if (x == 3) {
+          // configType
+          td.innerHTML =
+            data.data.created_modules[0].module.config_type ?? "-";
+
+        } else if (x == 4) {
+          // Servers
           let arrServers = [];
           let span = document.createElement("span");
+
           for (let y = 0; y < data.data.created_modules.length; y++) {
             arrServers.push(data.data.created_modules[y].server.server_name);
           }
+
           span.innerHTML = arrServers.join(", ");
           td.appendChild(span);
-          // td.innerHTML = arrServers.join(", ");
-        } else if (x == 4) {
+
+        } else if (x == 5) {
+          // Type (EPC / 5GC)
           let arrType = [];
           for (let y = 0; y < 1; y++) {
             arrType.push(
@@ -6332,66 +6354,28 @@ async function addModules() {
             );
           }
           td.innerHTML = arrType.join(", ");
-        } else if (x == 5) {
-          td.setAttribute("class", `td5`);
-          let svgElemEdit = `<svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="20" 
-          height="20" 
-          id="${numberTrModule}"
-          data-id-modules = "${numberTrModule}"
-          fill="currentColor" 
-          data-bs-toggle="modal"
-          data-bs-target="#schedulingModule"
-          class="bi bi-calendar4-week schedulingModule cursorPointer" 
-          viewBox="0 0 16 16">
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/>
-            <path d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
-            </svg>`;
-          td.insertAdjacentHTML("afterbegin", svgElemEdit);
+
         } else if (x == 6) {
-          td.setAttribute("class", `td6 tdEditModule`);
-          let svgElemEdit = `<svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="currentColor"
-          id="${numberTrModule}"
-          data-id-modules = "${numberTrModule}"
-          data-bs-toggle="modal"
-          data-bs-target="#editModule"
-          class="bi bi-pencil-square editModuleClick cursorPointer"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-          />
-          <path
-            fill-rule="evenodd"
-            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
-          />
-        </svg>`;
-
+          // Scheduling (SVG — بدون تغییر)
+          td.setAttribute("class", `td5`);
+          let svgElemEdit = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" id="${numberTrModule}" data-id-modules = "${numberTrModule}" fill="currentColor" data-bs-toggle="modal" data-bs-target="#schedulingModule" class="bi bi-calendar4-week schedulingModule cursorPointer" viewBox="0 0 16 16"> <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z"/> <path d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/> </svg>`;
           td.insertAdjacentHTML("afterbegin", svgElemEdit);
-        } else if (x == 7) {
-          td.setAttribute("class", `td7 tdRemoveModule`);
-          let svgElemEdit = `<svg 
-          xmlns="http://www.w3.org/2000/svg"
-         width="20" 
-         height="20" 
-         id="${numberTrModule}"
-         data-id-modules = "${numberTrModule}"
-         data-bs-toggle="modal"
-         data-bs-target="#removeModule"
-         fill="currentColor" 
-         class="bi bi-trash3 deleteModuleClick cursorPointer"
-         viewBox="0 0 16 16">
-         <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-         </svg>`;
 
+        } else if (x == 7) {
+          // Edit (SVG — بدون تغییر)
+          td.setAttribute("class", `td6 tdEditModule`);
+          let svgElemEdit = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" id="${numberTrModule}" data-id-modules = "${numberTrModule}" data-bs-toggle="modal" data-bs-target="#editModule" class="bi bi-pencil-square editModuleClick cursorPointer" viewBox="0 0 16 16" > <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" /> <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" /> </svg>`;
+          td.insertAdjacentHTML("afterbegin", svgElemEdit);
+
+        } else if (x == 8) {
+          // Delete (SVG — بدون تغییر)
+          td.setAttribute("class", `td7 tdRemoveModule`);
+          let svgElemEdit = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" id="${numberTrModule}" data-id-modules = "${numberTrModule}" data-bs-toggle="modal" data-bs-target="#removeModule" fill="currentColor" class="bi bi-trash3 deleteModuleClick cursorPointer" viewBox="0 0 16 16"> <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/> </svg>`;
           td.insertAdjacentHTML("afterbegin", svgElemEdit);
         }
+
         tr.appendChild(td);
+
       }
       document.getElementById("tBody3").appendChild(tr);
       modalEditModule();

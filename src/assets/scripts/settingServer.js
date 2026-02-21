@@ -1176,7 +1176,7 @@ async function StatusModules(id) {
           )
           .replace(
             /\b(inactive|dead)\b/gi,
-            `<span style="color:gray;">$1</span>`
+            `<span style="color:red;">$1</span>`
           )
           .replace(
             /\b(not-found|bad)\b/gi,

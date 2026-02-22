@@ -8,6 +8,7 @@ import favIconBBDH from "../img/logo white.png";
 import favIconMCI from "../img/logo-mci-02 (1).svg";
 import specialKeys, { dataModules } from "./dataModule.js"; // وارد کردن داده‌ها از data.js// data.js
 import { error } from "jquery";
+import VersioningModule from "./VersioningModules.js";
 let project = import.meta.env.VITE_API_PROJECT;
 
 if (project == "BBDH") {
@@ -1446,8 +1447,6 @@ function setJsonEditor(data) {
     const moduleName = UpperCaseModuleDetails; // از UpperCaseModuleDetails گرفته میشود
     const jsonData = data;
 
-    console.log(oldDataContainer);
-
     finalObject = createModuleObject(moduleName, subModuleName, jsonData);
 
     addIconsForSpecialKeys(finalObject);
@@ -1770,3 +1769,10 @@ function updateJsonKey(oldData, newData) {
   }
   return oldData;
 }
+// ---------------------------------VersioningModuleHere----------------------------------------
+let VersionSaveBtn = document.getElementById("SaveVersion")
+VersionSaveBtn.addEventListener("click", () => {
+  let VersionInput = document.getElementById("Version").value
+  let CommentInput = document.getElementById("comments").value
+  VersioningModule(VersionInput, CommentInput)
+})

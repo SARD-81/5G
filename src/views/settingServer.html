@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Config Server</title>
-
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/styles/settingServer.css" />
   <link id="favIcon" rel="icon" type="image/x-icon" />
 </head>
@@ -191,6 +191,10 @@
               </div>
             </div>
             <div>
+              <button type="button" id="VersioningModule" class="btn btn-info my-3 mx-3 " title="Version Modal"
+                data-bs-toggle="modal" data-bs-target="#VersioningModal">
+                <span id="spanExportModule"> Versioning module </span>
+              </button>
               <button type="button" id="exportModule" class="btn btn-primary my-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                   class="bi bi-download me-md-2" viewBox="0 0 16 16">
@@ -403,6 +407,35 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="modal fade" id="VersioningModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modalBox  modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="">versioning modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body modalLog">
+                <div class="modalInputBox">
+                  <div>
+                    <label for="Version">Version</label>
+                    <input type="text" id="Version" name="Version">
+                  </div>
+                  <div>
+                    <label for="">comment</label>
+                    <textarea name="VersioningComments" id="comments"></textarea>
+                  </div>
+
+                  <div class="VersionModalButtons">
+                    <button class="bg-danger" data-bs-dismiss="modal" aria-label="Close">close</button>
+                    <button class="bg-success" id="SaveVersion">save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 

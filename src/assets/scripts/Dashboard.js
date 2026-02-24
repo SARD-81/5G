@@ -1,7 +1,7 @@
 import { auth_name, setAuthName } from "./auth.js";
 import useApi from "./useApi.js";
 import Toastify from "toastify-js";
-import IconBBDH from "../img/bbdh-rightel.png";
+import IconBBDH from "../img/logo white with logo type.png";
 import favIconBBDH from "../img/logo white.png";
 import IconMCI from "../img/logo-mci-02 (1).svg";
 import IconBBU from "../img/image.png";

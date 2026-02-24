@@ -1192,7 +1192,7 @@ async function StatusModules(id) {
           .replace(/\bfailed\b/gi, `<span style="color:red;">failed</span>`)
           .replace(
             /\b(running|exited)\b/gi,
-            `<span style="color:green;">$1</span>`
+            `<span style="color:darkgreen;">$1</span>`
           )
           .replace(
             /\b(activating|reloading)\b/gi,
